@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { openChest } from '../redux/slices/userSlice';
+import bronzeChestImage from '../images/bronze-chest.png';
+import silverChestImage from '../images/silver-chest.png';
+import goldChestImage from '../images/gold-chest.png';
 
 const SliderWrapper = styled.div`
   display: flex;
@@ -57,17 +60,17 @@ function ChestSlider() {
   return (
     <SliderWrapper>
       <ChestImage
-        src="/images/bronze-chest.png"
+        src={bronzeChestImage}
         alt="Bronze Chest"
         onClick={() => handleChestClick('bronze')}
       />
       <ChestImage
-        src="/images/silver-chest.png"
+        src={silverChestImage}
         alt="Silver Chest"
         onClick={() => handleChestClick('silver')}
       />
       <ChestImage
-        src="/images/gold-chest.png"
+        src={goldChestImage}
         alt="Gold Chest"
         onClick={() => handleChestClick('gold')}
       />

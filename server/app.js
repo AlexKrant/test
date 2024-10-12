@@ -11,6 +11,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(apiLimiter);  // Перемещено сюда
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -26,8 +27,6 @@ app.use('/api/user', require('./routes/user'));
 app.use('/api/chests', require('./routes/chests'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/payments', require('./routes/payments'));
-
-app.use('/api/', apiLimiter);
 
 app.use(errorHandler);
 

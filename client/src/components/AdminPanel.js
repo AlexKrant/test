@@ -29,17 +29,26 @@ const ChestButton = styled.button`
 function AdminPanel() {
   const dispatch = useDispatch();
   const { chestContents } = useSelector(state => state.admin);
+  const { isAdmin } = useSelector(state => state.user);  // Предполагается, что у пользователя есть поле isAdmin
   const [newContent, setNewContent] = useState({ text: '', link: '' });
 
   useEffect(() => {
-    dispatch(fetchChestContents());
-  }, [dispatch]);
+    if (isAdmin) {
+      dispatch(fetchChestContents());
+    }
+  }, [dispatch, isAdmin]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateChestContents(newContent));
-    setNewContent({ text: '', link: '' });
+    if (isAdmin) {
+      dispatch(updateChestContents(newContent));
+      setNewContent({ text: '', link: '' });
+    }
   };
+
+  if (!isAdmin) {
+    return <div>Access denied. You must be an admin to view this page.</div>;
+  }
 
   return (
     <AdminWrapper>
